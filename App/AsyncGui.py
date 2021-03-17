@@ -107,7 +107,6 @@ class AsyncApp(App):
         
         sample = self.csound.sample_path
 
-        pitchshift(self.csound.audio_dir,sample, 24)
         '''This method is also run by the asyncio loop and periodically prints
         something.
         '''
@@ -127,9 +126,13 @@ class AsyncApp(App):
                         recordingStatus = not recordingStatus
                         # await asyncio.create_task(self.audio.saveVoice())
 
-                    elif self.appStatus == "playSample":
-                        pass
-                        self.csound.play_sample()
+                    elif self.appStatus == "pause":
+
+                        print(self.csound.pt.isRunning()) # True
+                        # self.csound.pt.pause()
+                        self.csound.pt.togglePause()
+                        print(self.csound.pt.isRunning()) # True
+
                         # playback_task = asyncio.create_task(self.audio.player('recordedFile.wav', self.devices['out']))
 
                     elif self.appStatus == "playMidi":

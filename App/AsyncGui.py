@@ -2,7 +2,6 @@
 in asyncio event loop as just another async coroutine.
 '''
 import asyncio
-import pyaudio
 import wave
 
 from kivy.app import App
@@ -20,6 +19,7 @@ Config.set('graphics', 'resizable', False)
 from Modules.AudioInterface import AudioInterface
 from Modules.Sampler import CsoundSampler
 from Modules.PreprocessingSample import pitchshift
+from Modules.SoundGeneration import get_sound
 
 # from Modules.testSampler import CsoundSampler
 
@@ -107,7 +107,7 @@ class AsyncApp(App):
         
         sample = self.csound.sample_path
 
-        pitchshift(self.csound.audio_dir,sample, 24)
+        # pitchshift(self.csound.audio_dir,sample, 24)
         '''This method is also run by the asyncio loop and periodically prints
         something.
         '''
@@ -126,6 +126,11 @@ class AsyncApp(App):
                         record_task.cancel()
                         recordingStatus = not recordingStatus
                         # await asyncio.create_task(self.audio.saveVoice())
+
+                    elif self.appStatus == "generate":
+                        print("generating")
+                        # generate_task = asyncio.create_task(get_sound())
+                        generate_task = asyncio.ensure_future((get_sound()))
 
                     elif self.appStatus == "playSample":
                         pass

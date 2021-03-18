@@ -85,7 +85,7 @@
         text: 'Generate'
         pos: dp(380),dp(480)
         size: dp(100), dp(100)
-        on_press: lab.text = "Generating with values {},{},{},{},{},{},{},{}".format(round(s1.value,1),round(s2.value,1),round(s3.value,1),round(s4.value,1),round(s5.value,1),round(s6.value,1),round(s7.value,1),round(s8.value,1))
+        on_press: app.nextEvent('generate')
 
     Button:
         id: export

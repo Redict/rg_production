@@ -9,6 +9,12 @@ import asyncio
 import pyaudio
 import wave
 
+import os
+sttPath = os.path.join(os.getcwd(), '..\\..\\rg_speech_to_text')
+print(os.path.exists(sttPath))
+sys.path.insert(0, sttPath)
+from TheSoundOfAIOSR.audiointerface.async_io import stream_capture
+
 class AudioInterface:
 
     def __init__(self):
